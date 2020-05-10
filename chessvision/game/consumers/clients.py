@@ -7,9 +7,8 @@ log = logging.getLogger(__name__)
 
 class ClientConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.room_name = self.scope['url_route']['kwargs']['room_name']
-        self.room_group_name = 'game_v1'
-        log.info("User Connected")
+        self.active_game_id = self.scope['url_route']['kwargs']['active_game_id']
+        self.room_group_name = 'active_game-'+self.active_game_id
         # Join room group
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -28,19 +27,17 @@ class ClientConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
     async def receive(self, text_data):
         content = json.loads(text_data)
+        log.info("in receive: "+content["move"])
         msg_type = content["type"]
-        msg = content["message"]
-        if msg_type == "move":
-            log.info("Received move: %s", msg['move'])
-            return await self.apply_move(msg)
+        if msg_type == "gameMove":
+            return await self.apply_move(content["move"])
 
-    async def apply_move(self, msg: dict):
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {"type": "player.move", "move": msg["move"]},
-        )
+    async def apply_move(self, move):
+        log.info("in self apply move: "+move)
+        await self.channel_layer.send("gamev1", 
+        {"type": "player.move", "active_game_id": self.room_group_name, "move": move})
 
-    async def player_move(self, event):
+    async def player_move_response(self, event):
          # Send message to WebSocket (all players in room are notified of incoming move)
-        move = event["move"]
-        await self.send(json.dumps(move))
+        resp = {"type": "gameMove", "move": event["move"], "gameState": event["state"]}
+        await self.send(json.dumps(resp))

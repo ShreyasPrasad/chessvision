@@ -7,18 +7,31 @@ import {
 } from './socket'
 
 import { Dispatch } from '../../reducers/combinedType'
+import { AnyObj } from 'app/utils/extraTypes';
 
-export default (uri: string) => (dispatch: Dispatch) => {
+const socketInstances = {
+
+}
+
+export const initiateConnection = (name: string, uri: string) => (dispatch: Dispatch) => {
     if (!('WebSocket' in window)) {
-        dispatch(socketError({ error: 'WebSocket is not supported by your browser' }));
+        dispatch(socketError('WebSocket is not supported by your browser'));
         return;
     }
-
     const socket = new WebSocket(uri);
-    dispatch(socketConnecting());
+    
+    dispatch(socketConnecting(name));
 
-    socket.onopen = () => dispatch(socketOpening({ instance: socket }));
-    socket.onerror = () => dispatch(socketError({ error: true }));
-    socket.onmessage = evt => dispatch(socketMessaged(JSON.parse(evt.data)));
-    socket.onclose = () => dispatch(socketClosed());
+    socket.onopen = () => dispatch(socketOpening( name ));
+    socket.onerror = (evt) => dispatch(socketError(name, evt));
+    socket.onmessage = evt => dispatch(socketMessaged(name, JSON.parse(evt.data)));
+    socket.onclose = () => dispatch(socketClosed(name));
+
+    socketInstances[name]=socket;
 };
+
+export const sendMessage = (name: string, message: AnyObj) => {
+    if (socketInstances[name]!==null){
+        socketInstances[name].send(JSON.stringify(message));
+    }
+}

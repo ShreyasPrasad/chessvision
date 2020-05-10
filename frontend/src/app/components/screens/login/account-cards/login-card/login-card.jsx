@@ -21,12 +21,25 @@ function LoginCard(props) {
   }
 
   const onSelectCreateAccount = () => {
+    props.setErrorState(null, null);
     props.selectCard('signup');
   }
 
   const handleAlertClose = () => {
     //reset login error state
     props.setErrorState(null, null);
+  }
+
+  const loginUserEnabled = () => {
+    //perform basic, implicit verification:
+    //1. check for empty characters
+    const fieldKeys = Object.keys(loginFields);
+    for (const key of fieldKeys){
+      if (loginFields[key]==null || loginFields[key]==""){
+        return false;
+      }
+    }
+    return true;
   }
 
   return (
@@ -39,11 +52,11 @@ function LoginCard(props) {
              <TextField disabled={props.loading} className="username" onChange={(evt)=>onSetLoginField('username', evt)} value={loginFields.username} label="Username" variant="outlined" />
           </div>
           <div className="passwordField">
-            <TextField disabled={props.loading} className="password" onChange={(evt)=>onSetLoginField('password', evt)} value={props.password} label="Password" type="password" variant="outlined" />
+            <TextField disabled={props.loading} className="password" onChange={(evt)=>onSetLoginField('password', evt)} value={loginFields.password} label="Password" type="password" variant="outlined" />
           </div>
         </div>
         <div className="loginSubmit">
-          <Button onClick={onProcessLogin} disabled={props.loading} className="loginButton" variant="contained" color="primary">
+          <Button onClick={onProcessLogin} disabled={props.loading || !loginUserEnabled()} className="loginButton" variant="contained" color="primary">
             Login
           </Button>
           <Button onClick={onSelectCreateAccount} disabled={props.loading} className="createButton" variant="outlined" color="primary">

@@ -1,7 +1,7 @@
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import App from '../components/screens/App';
-import { authUser } from '../actions/user/user';
+import { authUserWithCSRF } from '../actions/user/user';
 import { appStateType } from '../reducers/combinedType';
 
 /* ========== ~~~~~~~~~~ GamePage: PARENT ~~~~~~~~~~ ========== */
@@ -18,7 +18,7 @@ function mapStateToProps({user} : appStateType) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return bindActionCreators(
     {
-      authUser
+      authUserWithCSRF
     },
     dispatch
   );

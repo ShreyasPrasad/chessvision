@@ -9,25 +9,29 @@ export const SOCKET_CLOSED = 'SOCKET_CLOSED';
 
 //actions creators for socket actions defined above 
 
-export const socketConnecting = () => ({
+export const socketConnecting = (name: string) => ({
     type: SOCKET_CONNECTING,
+    name
 })
 
-export const socketOpening = (payload: any) => ({
+export const socketOpening = (name: string) => ({
     type: SOCKET_OPENED,
-    payload
+    name
 })
 
-export const socketMessaged = (payload: any) => ({
+export const socketMessaged = (name: string, message: any) => ({
     type: SOCKET_MESSAGED,
-    payload
+    name,
+    message
 })
 
-export const socketError = (payload: any) => ({
+export const socketError = (name: string, payload: any) => ({
     type: SOCKET_ERROR,
+    name,
     payload
 })
 
-export const socketClosed = () => ({
-    type: SOCKET_CLOSED
+export const socketClosed = (name: string) => ({
+    type: SOCKET_CLOSED,
+    name
 })

@@ -2,4 +2,4 @@
 
 //-----------------------stringObj------------------------
 //string property value object with any number of keys
-export type StringObj = {[key: string]: string}
+export type AnyObj = {[key: string]: any}

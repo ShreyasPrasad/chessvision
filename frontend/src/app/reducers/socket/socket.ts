@@ -8,32 +8,37 @@ import {
 } from '../../actions/socket/socket';
 import { socketStateType } from '../socket/types'
 
-const defaultState = {
-    instance: null,
+const defaultSocketState = {}
+
+const defaultSingleSocketState = {
     loading: false,
     connected: false,
     error: false,
     message: null,
 }
 
-export default function game(state: socketStateType = defaultState, action: AnyAction) {
+export default function socket(state: socketStateType = defaultSocketState, action: AnyAction) {
   const newState = JSON.parse(JSON.stringify(state))
   switch (action.type) {
     case SOCKET_CONNECTING:
+        newState[action.name] = defaultSingleSocketState;
         newState.loading = true;
       return newState;
     case SOCKET_OPENED:
-        newState.loading = false;
-        newState.connected = true;
-        newState.instance=action.payload;
+        newState[action.name].loading = false;
+        newState[action.name].connected = true;
         return newState;
     case SOCKET_MESSAGED:
+        //indicate most recent message from socket in question
+        newState[action.name].message = action.message;
         return newState;
     case SOCKET_CLOSED:
+        //remove socket, so that socket state only corresponds to active socket connections
+        delete newState[action.name];
         return newState;
     case SOCKET_ERROR:
-        newState.error=action.payload;
-        newState.loading = false;
+        newState[action.name].error=action.payload;
+        newState[action.name].loading = false;
         return newState;
     default:
       return newState;

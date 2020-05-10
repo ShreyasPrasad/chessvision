@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'corsheaders',
+
     # Custom Applications 
     'accounts',
     'game',
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -121,6 +124,23 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#DEFINE custom user model
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+#CSRF
+
+CSRF_TRUSTED_ORIGINS = ['localhost:3000']
+
+#CORS Policy
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+SESSION_COOKIE_SAMESITE = None
+CSRF_COOKIE_SAMESITE = None
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

@@ -1,15 +1,15 @@
 import { Route, Redirect } from 'react-router-dom';
 import React from 'react';
 
-//private route for handling permission-requiring components 
+//private route for handling login-requiring page wrappers
 
 const PrivateRoute = ({ permitted, component: Component, ...rest }) => (
-    <Route {...rest} render={({location}) => (
+    <Route {...rest} render={(props) => (
         permitted 
         ? <Component {...props} />
         : <Redirect to={{
           pathname: "/login",
-          state: { from: location }
+          state: { from: props.location }
         }}
       />
     )} />
