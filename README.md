@@ -24,4 +24,5 @@ Some screenshots of the web app are as follows:
 #### Game Page
 ![alt text](https://github.com/ShreyasPrasad/chessvision/blob/master/screenshots/game.PNG?raw=true)
 
-
+## Future Plans
+In the future, I hope to add a rating system based on the widely accepted GLICKO-2 system, along with the ability for users to view their past games.
