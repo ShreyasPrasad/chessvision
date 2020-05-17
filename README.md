@@ -10,9 +10,9 @@ The app's functionality can be divided into two sections as Daphne faciliates: t
 Some screenshots of the web app are as follows: 
 
 #### Login
-![alt text](https://github.com/ShreyasPrasad/chessvision/blob/master/screenshots/login.png?raw=true)
+![alt text](https://github.com/ShreyasPrasad/chessvision/blob/master/screenshots/login.PNG?raw=true)
 
 #### Game Page
-![alt text](https://github.com/ShreyasPrasad/chessvision/blob/master/screenshots/game.png?raw=true)
+![alt text](https://github.com/ShreyasPrasad/chessvision/blob/master/screenshots/game.PNG?raw=true)
 
 
