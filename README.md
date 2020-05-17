@@ -25,4 +25,4 @@ Some screenshots of the web app are as follows:
 ![alt text](https://github.com/ShreyasPrasad/chessvision/blob/master/screenshots/game.PNG?raw=true)
 
 ## Future Plans
-In the future, I hope to add a rating system based on the widely accepted GLICKO-2 system, along with the ability for users to view their past games.
+In the future, I hope to add a rating system based on the widely accepted GLICKO-2 system, along with the ability for users to view their past games. Also I need to figure out how to make a nice looking logo...
