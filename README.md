@@ -11,7 +11,7 @@ To prevent users from tampering with the game state on the client side, the game
 
 1. Player 1 makes a move 
 2. Player 1's client consumer receives the move and dispatches a message to the game consumer 
-3. The game consumer processes the move, assesses the current game state, then sends a message to both players' client consumers via Channel's group_send
+3. The game consumer processes the move, assesses the current game state, then sends a message to both players' client consumers via Channel's group_send method (targeting channel groups)
 4. Both players' client's consumers send a message back down to their respective client's websocket
 5. The move that Player 1 made is reflected in the games of both users 
 
