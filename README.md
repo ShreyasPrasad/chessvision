@@ -16,7 +16,6 @@ To prevent users from tampering with the game state on the client side, the game
 5. The move that Player 1 made is reflected in the games of both users 
 
 ## Screenshots
-Some screenshots of the web app are as follows: 
 
 #### Login
 ![alt text](https://github.com/ShreyasPrasad/chessvision/blob/master/screenshots/login.PNG?raw=true)
