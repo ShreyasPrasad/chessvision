@@ -149,7 +149,7 @@
     "@hot-loader/react-dom": "^16.12.0",
     "@types/jquery.tools": "^1.2.5",
     "@types/recompose": "^0.30.7",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "chess.js": "^0.10.3",
     "connected-react-router": "^6.6.1",
     "core-js": "^3.6.4",
